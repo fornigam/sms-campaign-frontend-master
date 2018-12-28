@@ -1,0 +1,93 @@
+<section class="content-header">
+  <h1>Users</h1>
+</section>
+
+<section class="content">
+
+  <div class="row">
+    <div class="col-md-3">
+      
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Add User</h3>
+        </div>
+        <form role="form">
+          <div class="box-body">
+            <div class="form-group">
+              <label>User Full Name</label>
+              <input type="text" class="form-control" ng-model="newUser.fullname" placeholder="Enter Full Name">
+            </div>
+            <div class="form-group">
+              <label>System Username</label>
+              <input type="text" class="form-control" ng-model="newUser.username" placeholder="Enter Username">
+            </div>
+            <div class="form-group">
+              <label>System Password</label>
+              <input type="password" class="form-control" ng-model="newUser.password" placeholder="Enter Password">
+            </div>
+            <div class="form-group">
+              <label>User Type</label>
+              <select class="form-control" ng-model="newUser.user_type">
+                <option value="0">Super Admin</option>
+                <option value="1">Admin</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Mobile</label>
+              <input type="text" class="form-control" ng-model="newUser.mobile" placeholder="Enter Mobile">
+            </div>
+          </div>
+
+          <div class="box-footer">
+            <button type="submit" ng-click="addUser()" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <div class="col-md-9">
+      
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Users List</h3>
+        </div>
+        <div class="box-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th style="width: 10px">#</th>
+                <th>Fullname</th>
+                <th>System Username</th>
+                <th>User Type</th>
+                <th>Actions</th>
+              </tr>
+              <tr ng-repeat="user in users">
+                <td ng-bind="$index+1"></td>
+                <td ng-bind="user.fullname"></td>
+                <td ng-bind="user.username"></td>
+                <td>
+                  <span ng-if="user.user_type==0" class="label label-success">Super Admin</span>
+                  <span ng-if="user.user_type==1" class="label label-warning">Admin</span>
+                </td>
+                <td>
+                  <button type="button" ng-click="deleteUser(user)" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                  <button type="button" ng-click="editUserModal(user)" class="btn btn-warning btn-flat"><i class="fa fa-edit"></i></button>
+                  <button type="button" ng-click="creditUserModal(user)" class="btn btn-success btn-flat"><i class="fa fa-money"></i></button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box-footer">
+          <pagination class="pull-right" ng-change="pageChanged()" max-size="5" boundary-links="true" total-items="search_users.totalCount" ng-model="search_users.currentPage"></pagination>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>

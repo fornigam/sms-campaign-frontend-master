@@ -1,0 +1,209 @@
+<section class="content-header">
+  <h1>Create Your Campaign Here</h1>
+</section>
+
+<section class="content">
+
+  <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Send Message</h3>
+        </div>
+        <form role="form" onsubmit="ShowLoading(this)" name="messageform" id="messageform" action="/SendMessage" method="post" enctype="multipart/form-data">
+          <div class="box-body" style="">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Type Your Message</label>
+                  <textarea ng-model="finalMessageObj.message_text" class="form-control wt-resize" rows="3" name="message" id="message" placeholder="Enter your message..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                  <label for="image1">Select Image 1</label>
+                  <div>
+                    <button ng-if='!finalMessageObj.files[0].file_name && !finalMessageObj.files[0].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 0)" name="images" ngf-multiple="false" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="1MB">Select</button>
+
+                    <div ng-if='!finalMessageObj.files[0].file_name && finalMessageObj.files[0].is_uploading'>
+                      <img src='../../dist/img/ajax-loader.gif' />
+                    </div>
+
+                    <div ng-if='finalMessageObj.files[0].file_name'>
+                      <button class="btn btn-danger" ng-click="removeFile(0)">
+                        Image File 1 Uploaded - Click to Remove
+                      </button>
+                    </div>
+
+                  </div>
+                  <p class="help-block">Size less than 1 MB. Only JPG and PNG supported.</p>
+                </div>
+
+                <div class="form-group">
+                  <label for="image1">Select Image 3</label>
+                  <div>
+                    <button ng-if='!finalMessageObj.files[2].file_name && !finalMessageObj.files[2].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 2)" name="images" ngf-multiple="false" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="1MB">Select</button>
+
+                    <div ng-if='!finalMessageObj.files[2].file_name && finalMessageObj.files[2].is_uploading'>
+                      <img src='../../dist/img/ajax-loader.gif' />
+                    </div>
+
+                    <div ng-if='finalMessageObj.files[2].file_name'>
+                      <button class="btn btn-danger" ng-click="removeFile(2)">
+                        Image File 3 Uploaded - Click to Remove
+                      </button>
+                    </div>
+
+                  </div>
+                  <p class="help-block">Size less than 1 MB. Only JPG and PNG supported.</p>
+                </div>
+
+                  <div class="form-group">
+                    <label for="image1">Select Audio</label>
+                    <div>
+                      <button ng-if='!finalMessageObj.files[4].file_name && !finalMessageObj.files[4].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 4)" name="images" ngf-multiple="false" ngf-pattern="'audio/*'" ngf-accept="'audio/*'" ngf-max-size="1MB">Select</button>
+
+                      <div ng-if='!finalMessageObj.files[4].file_name && finalMessageObj.files[4].is_uploading'>
+                        <img src='../../dist/img/ajax-loader.gif' />
+                      </div>
+
+                      <div ng-if='finalMessageObj.files[4].file_name'>
+                        <button class="btn btn-danger" ng-click="removeFile(4)">
+                          Audio Uploaded - Click to Remove
+                        </button>
+                      </div>
+
+                    </div>
+                    <p class="help-block">Size less than 1 MB. Only MP3 supported.</p>
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="image1">Select Text/PDF</label>
+                    <div>
+                      <button ng-if='!finalMessageObj.files[6].file_name && !finalMessageObj.files[6].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 6)" name="images" ngf-multiple="false" ngf-pattern="'.pdf, .txt'" ngf-accept="'.pdf, .txt'" ngf-max-size="1MB">Select</button>
+
+                      <div ng-if='!finalMessageObj.files[6].file_name && finalMessageObj.files[6].is_uploading'>
+                        <img src='../../dist/img/ajax-loader.gif' />
+                      </div>
+
+                      <div ng-if='finalMessageObj.files[6].file_name'>
+                        <button class="btn btn-danger" ng-click="removeFile(6)">
+                          Text File Uploaded - Click to Remove
+                        </button>
+                      </div>
+
+                    </div>
+                    <p class="help-block">Size less than 1 MB. Only PDF or Text supported.</p>
+                  </div>
+
+                  <div class="checkbox">
+                    <label>
+                      <input type="checkbox" ng-model='finalMessageObj.sendVcard'> Want to Send vCARD Check Here..!! 
+                    </label>
+                  </div>
+                  <div class="vcardDiv" ng-if='finalMessageObj.sendVcard'>
+                    <div class="row">
+                      <div class="col-md-6">  
+                        <div class="form-group">
+                          <label for="vcardtitle">VCard Title</label>
+                          <input type="text" ng-model='finalMessageObj.vcard_title' class="form-control" placeholder="Enter vCard Title">
+                        </div>
+                        <div class="form-group">
+                          <label for="email">Email</label>
+                          <input type="text" ng-model='finalMessageObj.vcard_email' class="form-control" placeholder="Email">
+                      </div>
+                        <div class="form-group">
+                          <label for="mobile">Mobile</label>
+                          <input type="text" ng-model='finalMessageObj.vcard_mobile' class="form-control" placeholder="Mobile number">
+                        </div>
+                     </div>
+                     <div class="col-md-6">
+                        <div class="form-group">
+                          <label for="fullname">Full name</label>
+                          <input type="text" ng-model='finalMessageObj.vcard_fullname' class="form-control" placeholder="Full name">
+                        </div>   
+                        <div class="form-group">
+                          <label for="website">Website</label>
+                          <input type="text"  ng-model='finalMessageObj.vcard_website' class="form-control" placeholder="Website">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Numbers</label>
+                  <textarea class="form-control wt-resize" rows="3" ng-model='finalMessageObj.phone_numbers' placeholder="Enter numbers in new line..."></textarea>
+                </div>
+
+                <div class="form-group">
+                  <label for="image1">Select Image 2</label>
+                  <div>
+                    <button ng-if='!finalMessageObj.files[1].file_name && !finalMessageObj.files[1].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 1)" name="images" ngf-multiple="false" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="1MB">Select</button>
+
+                    <div ng-if='!finalMessageObj.files[1].file_name && finalMessageObj.files[1].is_uploading'>
+                      <img src='../../dist/img/ajax-loader.gif' />
+                    </div>
+
+                    <div ng-if='finalMessageObj.files[1].file_name'>
+                      <button class="btn btn-danger" ng-click="removeFile(1)">
+                        Image File 2 Uploaded - Click to Remove
+                      </button>
+                    </div>
+
+                  </div>
+                  <p class="help-block">Size less than 1 MB. Only JPG and PNG supported.</p>
+                </div>
+                
+                <div class="form-group">
+                  <label for="image1">Select Image 4</label>
+                  <div>
+                    <button ng-if='!finalMessageObj.files[3].file_name && !finalMessageObj.files[3].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 3)" name="images" ngf-multiple="false" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="1MB">Select</button>
+
+                    <div ng-if='!finalMessageObj.files[3].file_name && finalMessageObj.files[3].is_uploading'>
+                      <img src='../../dist/img/ajax-loader.gif' />
+                    </div>
+
+                    <div ng-if='finalMessageObj.files[3].file_name'>
+                      <button class="btn btn-danger" ng-click="removeFile(3)">
+                        Image File 4 Uploaded - Click to Remove
+                      </button>
+                    </div>
+
+                  </div>
+                  <p class="help-block">Size less than 1 MB. Only JPG and PNG supported.</p>
+                </div>
+
+                <div class="form-group">
+                  <label for="image1">Select Video</label>
+                  <div>
+                    <button ng-if='!finalMessageObj.files[5].file_name && !finalMessageObj.files[5].is_uploading' class="btn btn-primary" ngf-select ng-model="image1" ngf-change="uploadFile($files, $file, $newFiles, $duplicateFiles, $invalidFiles, $event, 5)" name="images" ngf-multiple="false" ngf-pattern="'video/*'" ngf-accept="'video/*'" ngf-max-size="1MB">Select</button>
+
+                    <div ng-if='!finalMessageObj.files[5].file_name && finalMessageObj.files[5].is_uploading'>
+                      <img src='../../dist/img/ajax-loader.gif' />
+                    </div>
+
+                    <div ng-if='finalMessageObj.files[5].file_name'>
+                      <button class="btn btn-danger" ng-click="removeFile(5)">
+                        Video Uploaded - Click to Remove
+                      </button>
+                    </div>
+
+                  </div>
+                  <p class="help-block">Size less than 1 MB. Only MP4 supported.</p>
+                </div>
+                
+                <div class="form-group">
+                  <label for="image1">Select Location</label>
+                  <p ng-if='marker && marker.position' class="help-block">
+                    Current Position: <b>Lat:</b> <span ng-bind='marker.position.lat()'></span>  <b>Lng:</b> <span ng-bind='marker.position.lng()'></span> 
+                    <button type="button" ng-click="removeLocation()" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                  </p>
+                  <ng-map zoom="12" center="23.0225, 72.5714" on-click="locationClicked()" />
+                </div>
+              </div>
+          </div>
+        </div>
+        <div class="box-footer">
+            <button type="button" ng-click='createMessage()' class="btn btn-primary">Submit</button>
+         </div>
+      </form>  
+    </div>
+</section>

@@ -1,0 +1,51 @@
+{
+  "name": "AdminLTE",
+  "homepage": "http://almsaeedstudio.com",
+  "authors": [
+    "Abdullah Almsaeed <support@almsaeedstudio.com>"
+  ],
+  "description": "Admin dashboard and control panel template",
+  "main": [
+    "index2.html",
+    "dist/css/AdminLTE.css",
+    "dist/js/app.js",
+    "build/less/AdminLTE.less"
+  ],
+  "keywords": [
+    "css",
+    "js",
+    "html",
+    "template",
+    "admin",
+    "bootstrap",
+    "theme",
+    "backend",
+    "responsive"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "/.*",
+    "node_modules",
+    "bower_components",
+    "composer.json",
+    "documentation"
+  ],
+  "dependencies": {
+    "angular-timeago": "~0.2.4",
+    "angular-bootstrap": "~0.14.3",
+    "angular": "~1.4.8",
+    "angular-animate": "~1.4.8",
+    "angular-cookies": "~1.4.8",
+    "angular-growl-v2": "~0.7.9",
+    "angular-md5": "~0.1.10",
+    "angular-resource": "~1.4.8",
+    "angular-sanitize": "~1.4.8",
+    "angular-ui-router": "~0.2.15",
+    "lodash": "~3.10.1",
+    "ngstorage": "~0.3.10",
+    "restangular": "~1.5.1",
+    "underscore": "~1.8.3",
+    "ng-file-upload": "^12.2.13",
+    "ngmap": "^1.18.4"
+  }
+}

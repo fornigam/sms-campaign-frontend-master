@@ -1,0 +1,27 @@
+<div class="modal-header">
+  <h3 class="modal-title">Edit User</h3>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label>User Full Name</label>
+    <input type="text" class="form-control" ng-model="editUser.fullname" placeholder="Enter Full Name">
+  </div>
+  <div class="form-group">
+    <label>System Username</label>
+    <input type="text" class="form-control" ng-model="editUser.username" placeholder="Enter Username">
+  </div>
+  <div class="form-group">
+    <label>User Type</label>
+    <select class="form-control" ng-model="editUser.user_type">
+      <option value="0">Super Admin</option>
+      <option value="1">Admin</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label>Mobile</label>
+    <input type="text" class="form-control" ng-model="editUser.mobile" placeholder="Enter Mobile">
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="saveUser()">Save</button>
+</div>

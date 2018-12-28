@@ -1,0 +1,96 @@
+<section class="content-header">
+  <h1>Messages You Sent</h1>
+</section>
+
+<section class="content">
+  <div class='row'>
+    <div class="col-md-12">
+      
+      <div class="box box-primary">
+        <div class="box-header with-border">
+          <h3 class="box-title">Messages List</h3>
+        </div>
+        <div class="box-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th style="width: 10px">#</th>
+                <th width="15%">Message Text</th>
+                <th width="15%">Mobile Numbers</th>
+                <th>User</th>
+                <th>Location</th>
+                <th>VCard Details</th>
+                <th>Image File(s)</th>
+                <th>Audio File(s)</th>
+                <th>Video File(s)</th>
+                <th>Text File(s)</th>
+              </tr>
+              <tr ng-repeat="message in messages">
+                <td ng-bind="($index+((search_messages.currentPage-1)*search_messages.perPage))+1"></td>
+                <td ng-bind="message.message_text"></td>
+                <td>
+                  <span ng-bind="message.phone_numbers.split(',').length"></span> Numbers
+                  <button type="button" ng-click="openNumbersModal(message)" class="btn btn-success btn-flat"><i class="fa fa-eye"></i></button>
+                </td>
+                <td><span ng-bind="message.user_id.fullname"></span></td>
+                <td><span ng-if='message.lat && message.lng'><b>Lat: </b><span ng-bind="message.lat"></span><br/><b>Lng: </b><span ng-bind="message.lng"></span></span></td>
+                <td>
+                  <table ng-if='message.vcard_id && message.vcard_id.id' class="table">
+                    <tbody>
+                      <tr>
+                        <th>Attribute</th>
+                        <th>Value</th>
+                      </tr>
+                      <tr>
+                        <th>Title</th>
+                        <td ng-bind='message.vcard_id.title'></td>
+                      </tr>
+                      <tr>
+                        <th>Full Name</th>
+                        <td ng-bind='message.vcard_id.full_name'></td>
+                      </tr>
+                      <tr>
+                        <th>Email</th>
+                        <td ng-bind='message.vcard_id.email'></td>
+                      </tr>
+                      <tr>
+                        <th>Website</th>
+                        <td ng-bind='message.vcard_id.website'></td>
+                      </tr>
+                      <tr>
+                        <th>Phone</th>
+                        <td ng-bind='message.vcard_id.phone'></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td>
+                  <a class='table-file-links' target='_blank' ng-repeat='image_file in message.message_files | filter: { file_type: 0 }' ng-href="{{S3_BASE_URL}}/MessageFile/{{image_file.id}}/{{image_file.file_name}}">Image {{$index+1}}<br/></a>
+                </td>
+                <td>
+                  <a class='table-file-links' target='_blank' ng-repeat='image_file in message.message_files | filter: { file_type: 2 }' ng-href="{{S3_BASE_URL}}/MessageFile/{{image_file.id}}/{{image_file.file_name}}">Audio {{$index+1}}<br/></a>
+                </td>
+                <td>
+                  <a class='table-file-links' target='_blank' ng-repeat='image_file in message.message_files | filter: { file_type: 1 }' ng-href="{{S3_BASE_URL}}/MessageFile/{{image_file.id}}/{{image_file.file_name}}">Video {{$index+1}}<br/></a>
+                </td>
+                <td>
+                  <a class='table-file-links' target='_blank' ng-repeat='image_file in message.message_files | filter: { file_type: 3 }' ng-href="{{S3_BASE_URL}}/MessageFile/{{image_file.id}}/{{image_file.file_name}}">Text/PDF {{$index+1}}<br/></a>
+                </td>
+                <!-- <td>
+                  <button type="button" ng-click="deleteUser(user)" class="btn btn-danger btn-flat"><i class="fa fa-trash"></i></button>
+                  <button type="button" ng-click="editUserModal(user)" class="btn btn-warning btn-flat"><i class="fa fa-edit"></i></button>
+                </td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="box-footer">
+          <pagination class="pull-right" ng-change="pageChanged()" max-size="5" items-per-page='search_messages.perPage' boundary-links="true" total-items="search_messages.totalCount" ng-model="search_messages.currentPage"></pagination>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

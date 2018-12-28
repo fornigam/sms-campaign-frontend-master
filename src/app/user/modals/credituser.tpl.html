@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h3 class="modal-title">Credit User</h3>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label>User Full Name</label>
+    <span ng-bind='creditUser.fullname'></span>
+  </div>
+  <div class="form-group">
+    <label>System Username</label>
+    <span ng-bind='creditUser.username'></span>
+  </div>
+  <div class="form-group">
+    <label>User Type</label>
+    <span ng-if="creditUser.user_type==0" class="label label-success">Super Admin</span>
+    <span ng-if="creditUser.user_type==1" class="label label-warning">Admin</span>
+  </div>
+  <div class="form-group">
+    <label>Current Balance</label>
+    <span ng-bind='creditUser.current_balance'></span>
+  </div>
+  <div class="form-group">
+    <label>Credit Amount</label>
+    <input type="number" class="form-control" ng-model="recharge.amount" placeholder="Enter Recharge Amount">
+  </div>
+</div>
+<div class="modal-footer">
+  <button class="btn btn-primary" ng-click="rechargeCredit()">Recharge</button>
+</div>
